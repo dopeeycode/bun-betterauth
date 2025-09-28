@@ -6,6 +6,7 @@ import { db } from "./database/client"
  
 export const auth = betterAuth({
   basePath: "/auth",
+  trustedOrigins: ["http://localhost:5173"],
   database: drizzleAdapter(db, {
     provider: 'pg',
     usePlural: true
