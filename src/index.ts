@@ -22,6 +22,19 @@ const app = new Elysia()
   )
   .use(betterAuthPlugin)
   .get("/", () => "Access /openapi for API documentation")
+  .get("/users/:id", ({ params, user }) => {
+    const userId = user.id
+
+    const authenticatedUserName = user.name
+
+    return {
+      id: userId,
+      name: authenticatedUserName,
+      requestedId: params.id
+    }
+  }, {
+    auth: true
+  })
   .listen(3333)
 
 console.log(
