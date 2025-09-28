@@ -1,11 +1,11 @@
-import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { users } from "./users";
 import { randomUUIDv7 } from "bun";
 
 
 export const sessions = pgTable("sessions", {
-  id: uuid("id").primaryKey().$default(() => randomUUIDv7()),
-   userId: uuid("user_id")
+  id: text("id").primaryKey().$default(() => randomUUIDv7()),
+   userId: text("user_id")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expiresAt: timestamp("expires_at").notNull(),
